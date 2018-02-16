@@ -24,7 +24,6 @@ module.exports = function(opts)
 		port: 3000,
 		path: '/posts',
 		debug: false,
-		type: 'http',
 		cpuLoad: true,
 		stackUse: false,
 		updateInterval: 100000, // 1mins
@@ -57,7 +56,7 @@ module.exports = function(opts)
 
 	    	forked.send({
 	    		post: {
-			        type: opts.type,
+			        type: 'http',
 			        startTime: start,
 			        endTime: end,
 			        data: {
