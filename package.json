@@ -1,0 +1,21 @@
+{
+  "name": "simple-apm-agent",
+  "version": "0.0.1",
+  "description": "This is a simple APM Agent middleware, which will send data to the APM-Server using API Connection. It will transfare CPU, Memory and all Requests.",
+  "devDependencies": {
+    "express": "^4.16.2"
+  },
+  "dependencies": {
+    "pidusage": "^1.2.0"
+  },
+  "keywords": [
+    "apm",
+    "agent",
+    "monitoring",
+    "middleware",
+    "cpu",
+    "memory"
+  ],
+  "author": "Kristof Friess (k.friess@zebresel.com - Zebresel; http://www.zebresel.com)",
+  "license": "MIT"
+}
