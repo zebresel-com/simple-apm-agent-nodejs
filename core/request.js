@@ -58,7 +58,6 @@ module.exports = function(opts, data)
 	    }
 	    else
 	    {
-	    	console.log('multiupdate');
 	    	let posts = [];
 	    	for (var i = 0; i < newStack.length; i++)
 	    	{
