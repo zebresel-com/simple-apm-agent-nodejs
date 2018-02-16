@@ -34,6 +34,10 @@ module.exports = function(opts)
 		memory: {
 			updateInterval: 10000 // 10 second
 		},
+		diskUsage: true,
+		disk: {
+			updateInterval: 60000 // 60 second
+		},
 	};
 
 	// TODO: Use a child_process for all stuff like upload and watching

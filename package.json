@@ -6,6 +6,7 @@
     "express": "^4.16.2"
   },
   "dependencies": {
+    "diskusage": "^0.2.4",
     "pidusage": "^1.2.0"
   },
   "keywords": [

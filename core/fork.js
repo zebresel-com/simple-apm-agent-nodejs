@@ -10,6 +10,7 @@
 const request = require('./request.js');
 const CPULoad = require('./cpu.js');
 const MemoryLoad = require('./memory.js');
+const DiskUsage = require('./disk.js');
 
 function main(opts)
 {
@@ -22,11 +23,19 @@ function main(opts)
 	}
 
 	let mem = null;
-	// user wants track CPU?
+	// user wants track Memory?
 	if(opts.memoryLoad === true)
 	{
 		mem = new MemoryLoad(opts);
 		mem.start();
+	}
+
+	let disk = null;
+	// user wants track Disk?
+	if(opts.diskUsage === true)
+	{
+		disk = new DiskUsage(opts);
+		disk.start();
 	}
 }
 
