@@ -13,6 +13,8 @@ const MemoryLoad = require('./core/memory.js');
 
 const { fork } = require('child_process');
 
+let forked = null;
+
 
 module.exports = function(opts)
 {
@@ -40,15 +42,36 @@ module.exports = function(opts)
 		},
 	};
 
-	// TODO: Use a child_process for all stuff like upload and watching
-
 	opts = Object.assign(defaultOpts, opts) || defaultOpts;
 
 	opts.parentPid = process.pid;
 
-	const forked = fork(__dirname + '/core/fork.js', [
-		JSON.stringify(opts)
-	]);
+	let optsString = JSON.stringify(opts);
+
+	function startFork()
+	{
+		forked = fork(__dirname + '/core/fork.js', [
+			optsString
+		]);
+
+		forked.on('close', function(code, signal){
+			
+			process.nextTick(function(){
+				startFork();
+			});
+		});
+		
+		// forked.on('exit', function(code, signal){
+		// 	console.log('Exit: ', code, signal);
+		// });
+
+		// forked.on('error', function(err){
+		// 	console.log('Error: ', err);
+		// });
+
+	}
+
+	startFork();
 
 	return function(req, res, next){
 
@@ -57,21 +80,27 @@ module.exports = function(opts)
 	    res.once('finish', function()
 	    {
 	    	const end = Date.now();
-
-	    	forked.send({
-	    		post: {
-			        type: 'http',
-			        startTime: start,
-			        endTime: end,
-			        data: {
-			        	duration: (end-start),
-			        	dunit: 'ms',
-			        	method: req.method,
-			        	statusCode: req.statusCode,
-			        	path: req.originalUrl
-			        }
-			    }
-	    	});
+	    	try
+	    	{
+	    		forked.send({
+		    		post: {
+				        type: 'http',
+				        startTime: start,
+				        endTime: end,
+				        data: {
+				        	duration: (end-start),
+				        	dunit: 'ms',
+				        	method: req.method,
+				        	statusCode: req.statusCode,
+				        	path: req.originalUrl
+				        }
+				    }
+		    	});
+	    	}
+	    	catch(err)
+	    	{
+	    		console.error(err);
+	    	}
 	    });
 
 	    next();
