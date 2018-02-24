@@ -1,10 +1,67 @@
-#Getting Started
-Cooing Soon
+# Simple APM Agent
 
-#Examples
-Cooing Soon
+This is a node-js agent for the Simple APM. It is used to transfere important information of the clients to the master server. The agent will be integrated easily into an application with a web server as a middleware, if this feature is not needed, the system can also be used alone (by ignoring the middleware return) to get information about memory, disk, cpu.
 
-#License
+## Features
+
+* Memory usage of the system and the application
+* CPU usage of the system and the application
+* Disk usage of the whole system
+* Run in an fork process => no blocking of main activities
+
+
+## Getting Started
+
+First install the agent to your project:
+
+```
+npm install --save simple-apm-agent
+```
+
+Now integrat in your application for example to __express__, but it on the highst position as possible:
+
+```
+/* ... */
+
+// apm options with master information
+const apmOptions = {
+	appId: '<appId at master side>,
+	appSecret: '<secret at master side>',
+	host: 'localhost',
+	port: 3000
+};
+
+// get the apm middle for express
+const apm = require('simple-apm-agent')(apmOptions);
+
+expressApp.use(apm);
+
+/* ... */
+```
+
+## Options
+
+* __ssl:__ Use TLS/SSL for the connection to the master
+* __appId:__ Identifier for the master, each app should have an id
+* __appId:__ Access secret for the master, each app need it
+* __host:__ Master URL (Default: localhost)
+* __port:__ Master Port (Default: 3000)
+* __path:__ The Path of the master, where to send the data messages ((Default: /posts)
+* __debug:__ Enable Debug to get some logs (Default: false)
+* __stackUse:__ Enable stack of requests, so the system will collect all data first before send to the master (Default: false)
+* __updateInterval:__ Update interval in ms if stack update is used (Default: 100000)
+* __cpuLoad:__ Enable CPU load to track the CPU if possible (Default: true)
+* __cpu:__ Setting of the CPU retrive
+	* __updateInterval:__ Update interval of the CPU usage, means how often the CPU usage should be checked in ms (Default: 10000)
+* __memoryLoad:__ Enable memory load to track the memory usage if possible (Default: true)
+* __memory:__
+	* __updateInterval:__ Update interval of the memory usage, means how often the memory usage should be checked in ms (Default: 10000)
+},
+* __diskUsage:__ Enable disk usage to track the disk volume if possible (Default: true)
+* __disk:__
+	* __updateInterval:__ Update interval of the disk usage, means how often the disk usage should be checked in ms (Default: 60000)
+
+## License
 (The MIT License)
 
 Copyright (c) since 2016 Kristof Friess (Zebresel)
