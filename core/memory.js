@@ -27,18 +27,21 @@ class MemoryLoad
 
 			pusage.stat(self.opts.parentPid, function (err, stat) {
 
-				request(self.opts, {
-					post: {
-					    type: 'memory',
-					    startTime: Date.now(),
-					    data: {
-					    	free: os.freemem(),
-					    	total: os.totalmem(),
-					    	app: stat.memory,
-					    	unit: 'bytes'
-					    }
-					}
-				});
+				if(stat)
+				{
+					request(self.opts, {
+						post: {
+						    type: 'memory',
+						    startTime: Date.now(),
+						    data: {
+						    	free: os.freemem(),
+						    	total: os.totalmem(),
+						    	app: stat.memory,
+						    	unit: 'bytes'
+						    }
+						}
+					});
+				}
 
 		    });
 		},

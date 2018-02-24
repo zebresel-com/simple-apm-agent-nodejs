@@ -1,6 +1,6 @@
 {
   "name": "simple-apm-agent",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "This is a simple APM Agent middleware for node.js, which will send data to the APM-Server using API Connection. It will transfare CPU, Memory, Disk and all Requests.",
   "devDependencies": {
     "express": "^4.16.2"
