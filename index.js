@@ -99,6 +99,7 @@ module.exports = function(opts)
 	    	}
 	    	catch(err)
 	    	{
+	    		console.error('[APM][Middleware] Error on sending data to forked process');
 	    		console.error(err);
 	    	}
 	    });
