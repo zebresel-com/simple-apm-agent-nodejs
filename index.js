@@ -87,11 +87,12 @@ module.exports = function(opts)
 				        type: 'http',
 				        startTime: start,
 				        endTime: end,
+				        status: res.statusCode,
 				        data: {
 				        	duration: (end-start),
 				        	dunit: 'ms',
 				        	method: req.method,
-				        	statusCode: req.statusCode,
+				        	httpCode: res.statusCode,
 				        	path: req.originalUrl
 				        }
 				    }
