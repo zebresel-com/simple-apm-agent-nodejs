@@ -25,7 +25,7 @@ class MemoryLoad
 		const self = this;
 		this.interval = setInterval(function(){
 
-			pusage.stat(self.opts.parentPid, function (err, stat) {
+			pusage(self.opts.parentPid, function (err, stat) {
 
 				if(stat)
 				{

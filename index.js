@@ -10,11 +10,7 @@
 const request = require('./core/request.js');
 const CPULoad = require('./core/cpu.js');
 const MemoryLoad = require('./core/memory.js');
-
 const { fork } = require('child_process');
-
-let forked = null;
-
 
 module.exports = function(opts)
 {
@@ -87,7 +83,7 @@ module.exports = function(opts)
 				        type: 'http',
 				        startTime: start,
 				        endTime: end,
-				        status: res.statusCode,
+				        status: res.statusCode >= 400 ? 2 : 0,
 				        data: {
 				        	duration: (end-start),
 				        	dunit: 'ms',

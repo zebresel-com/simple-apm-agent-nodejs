@@ -46,7 +46,7 @@ class CPULoad
 				usage.cores = Object.keys(end.core).length;
 				usage.usage = (100 - ((end.idle - start.idle) / (end.total - start.total) ) * 100) * usage.cores;
 
-				pusage.stat(self.opts.parentPid, function (err, stat) {
+				pusage(self.opts.parentPid, function (err, stat) {
 
 					usage.appUsage = stat.cpu;
 

@@ -9,8 +9,8 @@
 
 var apm = require('./../index.js')({
     ssl: false,
-	appId: null,
-	appSecret: 'hahaha',
+	appId: 'example',
+	appSecret: 'example',
 	host: 'localhost',
 	port: 3000,
 	path: '/posts',
